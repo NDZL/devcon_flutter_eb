@@ -1,11 +1,17 @@
+@JS()
+library native_communicator;
+
 import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-//import 'dart:js' as js;
+import 'dart:js';
 //import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 import 'package:js/js.dart';
+
+// python -m http.server 8000
+
 
 @JS('triggerBarcodeScanner')
 external dynamic triggerBarcodeScanner();
@@ -13,20 +19,17 @@ external dynamic triggerBarcodeScanner();
 @JS('scanAndGetData')
 external dynamic scanAndGetData();
 
+// interop credits: https://tbrgroup.software/writing-a-flutter-web-plugin-with-javascript/
 
-
-//https://fireship.io/snippets/using-js-with-flutter-web/
-//https://pub.dev/packages/js
-//https://stackoverflow.com/questions/65423861/call-dart-method-from-js-in-flutter-web
-
-//https://stackoverflow.com/questions/74531539/how-to-get-callback-or-return-value-from-async-js-function-to-dart-in-flutter-we <== THIS ONE IS IMPLEMENTED HERE
-// DATA PULLED-UP FROM JS
-//https://fedingo.com/how-to-listen-to-variable-changes-in-javascript/
+@JS('jsPassDataToFlutter')
+external set _jsPassDataToFlutter(String Function(dynamic event) f);
 
 void main() {
-  runApp(const MyApp());
-}
 
+
+  runApp(const MyApp());
+
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -68,25 +71,18 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+
   void main() {
 
   }
 
+
   @override
   void didChangeDependencies() { //called when the page is created
-    callJS();
-  }
-
-  Future<void> callJS() async {
-    Timer.periodic(const Duration(milliseconds: 300), (timer) async {
-
-      dynamic result = await promiseToFuture(scanAndGetData());
-      //print(result);
-      _updateResFromJS(result);
-
+    _jsPassDataToFlutter = allowInterop((dynamic event) {
+      _updateResFromJS("<"+event+">");
+      return "ok";
     });
-
-
   }
 
   @override
