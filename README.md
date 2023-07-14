@@ -1,16 +1,4 @@
-# devcon_flutter_eb
+### *Please be aware that this application / sample is provided as-is for demonstration purposes without any guarantee of support*
 
-using eb intent apis from flutter - targeting just the Web platform
+### ZEBRA DEVCON 2023 - Flutter for Web integrating Zebra Enterprise Browser JS APIs and operating Datawedge
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

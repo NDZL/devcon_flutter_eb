@@ -71,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
   void main() {
 
   }
@@ -79,10 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void didChangeDependencies() { //called when the page is created
+    super.didChangeDependencies();
     _jsPassDataToFlutter = allowInterop((dynamic event) {
       _updateResFromJS("<"+event+">");
       return "ok";
     });
+
   }
 
   @override
@@ -108,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'Barcode data from Zebra Enterprise Browser API:',
             ),
+
             Text(
               _resFromJS,
               style: Theme.of(context).textTheme.headlineMedium,
